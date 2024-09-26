@@ -85,9 +85,8 @@ public class Slingshot : MonoBehaviour
         isMouseDonw = false;
         Shoot();
     }
-    private void Shoot() // 새를 발사하기
+    private IEnumerator ShootRroutine()
     {
-
         bird.isKinematic = false;
         // 고무줄을 당긴 만큼 새에게 힘을 가해준다.
         Vector3 birdForce = (currentPosition - center.position) * pushingForce * -1;
@@ -95,9 +94,15 @@ public class Slingshot : MonoBehaviour
 
         bird = null;
         birdCollider = null;
-
-        Invoke("CreateBird", 2);
+        // 1초뒤 새로운 새 생성
+        yield return new WaitForSeconds(1f);
+        CreateBird();
     }
+    private void Shoot() // 새를 발사하기
+    {
+       StartCoroutine(ShootRroutine());
+    }
+     
     private void ResetStrips()
     {
         //고무줄을 원래 위치로 이동시키기
