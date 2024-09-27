@@ -10,6 +10,7 @@ public class Bird : MonoBehaviour
     private BaseState[] states = new BaseState[(int)BirdType.Size];
 
     private Rigidbody2D birdRigd;
+    private bool skillUsed;
     public bool Skill {  get; private set; }
 
     private void Awake()
@@ -26,9 +27,10 @@ public class Bird : MonoBehaviour
     }
     public void UseSkill()
     {
-        if (states[(int)curState] != null) // 바꾼 상태에 맞는 능력 활성화
+        if (states[(int)curState] != null) // 바꾼 상태에 맞는 스킬 활성화
         {
-            states[(int)curState].BirdSkill(this);
+            states[(int)curState].BirdSkill(this); // 스킬 사용
+            skillUsed = true; // 이미 쓴 스킬을 못쓰도록하기
         }
     }
     public Rigidbody2D GetRigidbody()

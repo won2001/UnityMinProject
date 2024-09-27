@@ -4,26 +4,51 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    [SerializeField] GameObject monsterPrepap;
+    private int hp = 2;
+    [SerializeField] float defaultSpeed;
+    [SerializeField] float fastSpeed;
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Bird"))
+
+        if (collision.collider.CompareTag("Bird") || collision.collider.CompareTag("Obstacle"))
         {
-            Destroy(gameObject);
-        }
-        else if (collision.contacts[0].normal.y < 0.5)
-        {
-            //onDamaged(collision.transform.position);
-            Destroy(gameObject);
+            Rigidbody2D collisionRigidbody = collision.collider.GetComponent<Rigidbody2D>();
+            //Destroy(gameObject);
+            if (collisionRigidbody != null)
+            {
+                float currSpeed = collision.relativeVelocity.magnitude; // 충돌속도 계산
+
+                if (currSpeed >= fastSpeed)
+                {
+                    Debug.Log("데미지 2받음");
+                    TakeDamge(2);
+                }
+                else if (currSpeed >= defaultSpeed)
+                {
+                    Debug.Log("데미지 1받음");
+                    TakeDamge(1);
+                }
+                else
+                {
+                    Debug.Log("데미지 무시");
+                }
+            }
         }
     }
-    private void onDamaged(Vector2 targetPos)
+    private void TakeDamge(int damge)
     {
+        hp -= damge;
+        Debug.Log($"돼지체력 {hp}");
 
+        if (hp <= 0)
+        {
+            Die();
+        }
     }
-    private void offDamaged()
+    private void Die()
     {
-
+        Destroy(gameObject);
     }
 }
