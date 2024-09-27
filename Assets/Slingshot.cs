@@ -22,6 +22,7 @@ public class Slingshot : MonoBehaviour
     public float pushingForce;              // 새를 발사하는 힘
     [SerializeField] Rigidbody2D birdRigid;
     [SerializeField] Collider2D birdCollider;
+    private Bird currentBird;
     private void Start()
     {
         // 고무줄 연결하기
@@ -55,6 +56,11 @@ public class Slingshot : MonoBehaviour
             if (birdCollider)
             {
                 birdCollider.enabled = true;
+            }
+            if (Input.GetMouseButtonDown(0) && currentBird != null)
+            {
+                Debug.Log("스킬");
+                currentBird.UseSkill();
             }
         }
         else

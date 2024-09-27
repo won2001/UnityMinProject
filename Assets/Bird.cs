@@ -31,6 +31,10 @@ public class Bird : MonoBehaviour
             states[(int)curState].BirdSkill(this);
         }
     }
+    public Rigidbody2D GetRigidbody()
+    {
+        return birdRigd;
+    }
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -47,5 +51,38 @@ public class Bird : MonoBehaviour
 
         // 货甫 力芭
         Destroy(gameObject);
+    }
+}
+public class FastBird : BaseState
+{
+    private float speedUp = 2f;
+
+    public override void BirdSkill(Bird bird)
+    {
+        if (bird.Skill)
+        {
+            bird.GetRigidbody().velocity *= speedUp;
+        }
+
+    }
+}
+public class BombBird : BaseState
+{
+    private float explosionRadius = 5f;
+    private float explosionPower = 700f;
+
+    public override void BirdSkill(Bird bird)
+    {
+        Collider2D[] objects = Physics2D.OverlapCircleAll(bird.transform.position, explosionRadius);
+        foreach (Collider2D obj in objects)
+        {
+            Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                Vector2 direction = rb.transform.position - bird.transform.position;
+                rb.AddForce(direction.normalized * explosionPower);
+            }
+        }
+        Object.Destroy(bird.gameObject); // 气惯 饶 货 力芭
     }
 }
