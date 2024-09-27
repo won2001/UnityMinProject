@@ -20,7 +20,7 @@ public class Slingshot : MonoBehaviour
     [SerializeField] GameObject birdPrefab; // 새 프리팹
     public float birdPositionOffset;        // 새와 고무줄 사이 거리
     public float pushingForce;              // 새를 발사하는 힘
-    [SerializeField] Rigidbody2D bird;
+    [SerializeField] Rigidbody2D birdRigid;
     [SerializeField] Collider2D birdCollider;
     private void Start()
     {
@@ -66,12 +66,12 @@ public class Slingshot : MonoBehaviour
     private void CreateBird()
     {
         // 새를 생성하기
-        bird = Instantiate(birdPrefab).GetComponent<Rigidbody2D>();
+        birdRigid = Instantiate(birdPrefab).GetComponent<Rigidbody2D>();
         // 새가 발사준비중에는 충돌하지 않게하기
-        birdCollider = bird.GetComponent<Collider2D>();
+        birdCollider = birdRigid.GetComponent<Collider2D>();
         birdCollider.enabled = false;
         // 중력과 힘의 영향도 받지않게 하기
-        bird.isKinematic = true;
+        birdRigid.isKinematic = true;
 
         ResetStrips();
     }
@@ -87,12 +87,12 @@ public class Slingshot : MonoBehaviour
     }
     private IEnumerator ShootRroutine()
     {
-        bird.isKinematic = false;
+        birdRigid.isKinematic = false;
         // 고무줄을 당긴 만큼 새에게 힘을 가해준다.
         Vector3 birdForce = (currentPosition - center.position) * pushingForce * -1;
-        bird.velocity = birdForce;
+        birdRigid.velocity = birdForce;
 
-        bird = null;
+        birdRigid = null;
         birdCollider = null;
         // 1초뒤 새로운 새 생성
         yield return new WaitForSeconds(1f);
@@ -115,12 +115,12 @@ public class Slingshot : MonoBehaviour
         lineRenderers[0].SetPosition(1, position);
         lineRenderers[1].SetPosition(1, position);
 
-        if (bird)
+        if (birdRigid)
         {
             // 새의 위치와 방향 설정하기
             Vector3 dir = position - center.position;
-            bird.transform.position = position + dir.normalized * birdPositionOffset;
-            bird.transform.right = -dir.normalized;
+            birdRigid.transform.position = position + dir.normalized * birdPositionOffset;
+            birdRigid.transform.right = -dir.normalized;
         }
        
     }
