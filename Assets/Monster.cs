@@ -49,6 +49,7 @@ public class Monster : MonoBehaviour
     }
     private void Die()
     {
+        GameManager.instance.AddScore(100);
         Destroy(gameObject);
     }
 }
