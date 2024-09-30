@@ -7,8 +7,13 @@ public class Monster : MonoBehaviour
     private int hp = 2;
     [SerializeField] float defaultSpeed;
     [SerializeField] float fastSpeed;
+    private static int monsterCount = 0;
 
-
+    private void Start()
+    {
+        GameManager.instance.RegisterMonster();
+        //monsterCount++;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -50,6 +55,7 @@ public class Monster : MonoBehaviour
     private void Die()
     {
         GameManager.instance.AddScore(100);
+        GameManager.instance.MonsterDied();
         Destroy(gameObject);
     }
 }

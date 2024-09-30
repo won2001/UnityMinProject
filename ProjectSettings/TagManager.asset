@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Bird
+  - Obstacle
   layers:
   - Default
   - TransparentFX

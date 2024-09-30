@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Slingshot : MonoBehaviour
 {
+    //[SerializeField] AudioClip pullSound;
     [SerializeField] LineRenderer[] lineRenderers;//새총의 고무줄
     [SerializeField] Transform[] stripPositions; //고무줄의 양 끝 점
     [SerializeField] Transform center; // 새총의 중심
@@ -15,14 +16,17 @@ public class Slingshot : MonoBehaviour
 
     [SerializeField] float bottomBoundary; // 내려갈 수 있는 고무줄의 최소 높이
     bool isMouseDonw;
+    private AudioSource audioSource;
 
-    // 새 발사
-    [SerializeField] GameObject birdPrefab; // 새 프리팹
+    [Header("BirdShot")]// 새 발사
+    [SerializeField] GameObject[] birdPrefab; // 새 프리팹
     public float birdPositionOffset;        // 새와 고무줄 사이 거리
     public float pushingForce;              // 새를 발사하는 힘
     [SerializeField] Rigidbody2D birdRigid;
     [SerializeField] Collider2D birdCollider;
     private Bird currentBird;
+    private int currentBirdIndex = 0;
+    private bool isBirdInAir; // 새가 공중에 있는지 여부
     private void Start()
     {
         // 고무줄 연결하기
@@ -57,31 +61,54 @@ public class Slingshot : MonoBehaviour
             {
                 birdCollider.enabled = true;
             }
-            if (Input.GetMouseButtonDown(0) && currentBird != null)
-            {
-                Debug.Log("스킬");
-                currentBird.UseSkill();
-            }
         }
         else
         {
             // 고무줄을 원래위치로
             ResetStrips();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            currentBirdIndex = 0;
+            SwitchBird();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            currentBirdIndex = 1;
+            SwitchBird();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            currentBirdIndex = 2;
+            SwitchBird();
+        }
+        if (Input.GetMouseButtonDown(0) && isBirdInAir && currentBird != null)
+        {
+            currentBird.UseSkill();
+        }
     }
     private void CreateBird()
     {
         // 새를 생성하기
-        birdRigid = Instantiate(birdPrefab).GetComponent<Rigidbody2D>();
+        birdRigid = Instantiate(birdPrefab[currentBirdIndex]).GetComponent<Rigidbody2D>();
         // 새가 발사준비중에는 충돌하지 않게하기
         birdCollider = birdRigid.GetComponent<Collider2D>();
         birdCollider.enabled = false;
         // 중력과 힘의 영향도 받지않게 하기
         birdRigid.isKinematic = true;
 
+        currentBird = birdRigid.GetComponent<Bird>();
         ResetStrips();
     }
-
+    private void SwitchBird()
+    {
+        // 현재 새를 파괴하고 새로운 새를 생성
+        if (birdRigid != null)
+        {
+            Destroy(birdRigid.gameObject);
+        }
+        CreateBird();
+    }
     private void OnMouseDown()
     {
         isMouseDonw = true;
@@ -97,6 +124,7 @@ public class Slingshot : MonoBehaviour
         // 고무줄을 당긴 만큼 새에게 힘을 가해준다.
         Vector3 birdForce = (currentPosition - center.position) * pushingForce * -1;
         birdRigid.velocity = birdForce;
+        isBirdInAir = true;
 
         birdRigid = null;
         birdCollider = null;
