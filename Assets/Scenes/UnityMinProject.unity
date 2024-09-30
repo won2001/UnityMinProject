@@ -812,8 +812,6 @@ GameObject:
   m_Component:
   - component: {fileID: 612325097}
   - component: {fileID: 612325096}
-  - component: {fileID: 612325098}
-  - component: {fileID: 612325099}
   - component: {fileID: 612325095}
   m_Layer: 0
   m_Name: slingshot
@@ -871,7 +869,10 @@ MonoBehaviour:
   currentPosition: {x: 0, y: 0, z: 0}
   maxLength: 3
   bottomBoundary: -3.5
-  birdPrefab: {fileID: 6816824965486358357, guid: 95c48da792fac2745b060d6f956c6732, type: 3}
+  birdPrefab:
+  - {fileID: 6816824965486358357, guid: 95c48da792fac2745b060d6f956c6732, type: 3}
+  - {fileID: 5277088928100578347, guid: 4764746c4ea81014c987c54045a6194a, type: 3}
+  - {fileID: 3883515603295398677, guid: ecc7e8727fd833641968b4920d7c063a, type: 3}
   birdPositionOffset: -0.4
   pushingForce: 5
   birdRigid: {fileID: 0}
@@ -899,34 +900,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &612325098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 612325094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 709f38b9da62a9549a36cac751e21c07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  returnPool: {fileID: 0}
---- !u!114 &612325099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 612325094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2467fa167dc604c919b1aaf9a05c28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pool: []
-  prefab: {fileID: -4734953120030910515, guid: 95c48da792fac2745b060d6f956c6732, type: 3}
-  Size: 3
 --- !u!1001 &620206983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1549,6 +1522,59 @@ Transform:
   m_Father: {fileID: 612325097}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &991891575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 991891576}
+  - component: {fileID: 991891577}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &991891576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991891575}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.59, y: -0.04, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &991891577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991891575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d37927883ff65743833b02951cdf584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmClip: {fileID: 0}
+  bgmVolume: 0
+  sfxClip:
+  - {fileID: 8300000, guid: 4a9e80839ad1ff5449a91619e48098f2, type: 3}
+  - {fileID: 8300000, guid: 7a56181667c258749beb39b00af764b2, type: 3}
+  - {fileID: 8300000, guid: 616cb3afdf4fd5c42a925334229b4002, type: 3}
+  - {fileID: 8300000, guid: 7d44a3729bd091b468e882bf73136983, type: 3}
+  sfxVolume: 0.5
+  channels: 10
 --- !u!4 &1060451383 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3231237959639900481, guid: da1614a23d63ad94aad940c990b0d469, type: 3}
@@ -2567,7 +2593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6636768247582622143, guid: f0826c1422925434395033591204c378, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.74
+      value: 3.27
       objectReference: {fileID: 0}
     - target: {fileID: 6636768247582622143, guid: f0826c1422925434395033591204c378, type: 3}
       propertyPath: m_LocalPosition.y

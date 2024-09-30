@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayer;
     int channelIndx;
 
-    public enum Sfx { Slingshot ,Fly}
+    public enum Sfx { Slingshot ,FlyRed,FlyYellow,FlyBlack, Wood=5}
 
     private void Awake()
     {
@@ -51,7 +51,18 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySfx(Sfx sfx)
     {
-        sfxPlayer[0].clip = sfxClip[(int)sfx];
-        sfxPlayer[0].Play();
+        for (int index = 0; index < sfxPlayer.Length; index++)
+        {
+            int loopIndex = (index + channelIndx) % sfxPlayer.Length;
+
+            if (sfxPlayer[loopIndex].isPlaying)
+                continue;
+
+            channelIndx = loopIndex;
+            sfxPlayer[loopIndex].clip = sfxClip[(int)sfx];
+            sfxPlayer[loopIndex].Play();
+            break;
+        }
+        
     }
 }

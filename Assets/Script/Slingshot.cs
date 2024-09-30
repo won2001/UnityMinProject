@@ -39,6 +39,7 @@ public class Slingshot : MonoBehaviour
         CreateBird();
     }
 
+    private bool SlingshotSound = false;
     private void Update()
     {
         if (isMouseDonw)
@@ -61,11 +62,17 @@ public class Slingshot : MonoBehaviour
             {
                 birdCollider.enabled = true;
             }
+            if (!SlingshotSound)
+            {
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Slingshot);
+                SlingshotSound = true;
+            }
         }
         else
         {
             // 고무줄을 원래위치로
             ResetStrips();
+            SlingshotSound = false;
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -134,7 +141,19 @@ public class Slingshot : MonoBehaviour
     }
     private void Shoot() // 새를 발사하기
     {
-       StartCoroutine(ShootRroutine());
+        if (currentBirdIndex == 0) // 빨간새
+        {
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.FlyRed);
+        }
+        else if (currentBirdIndex == 1) // 노란새
+        {
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.FlyYellow);
+        }
+        else if (currentBirdIndex == 2) // 검은새
+        {
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.FlyBlack); // 필요 시
+        }
+        StartCoroutine(ShootRroutine());
     }
      
     private void ResetStrips()
