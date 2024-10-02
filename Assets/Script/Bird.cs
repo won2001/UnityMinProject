@@ -83,7 +83,7 @@ public class BombBird : BaseState
 {
     private float explosionRadius = 5f;
     private float explosionPower = 500f;
-    private float explosionDelay = 1.0f;//폭발지연 시간
+    private float explosionDelay = 0.5f;//폭발지연 시간
     private bool hasExploded = false;
     public override void BirdSkill(Bird bird)
     {

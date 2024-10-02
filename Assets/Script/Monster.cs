@@ -11,7 +11,7 @@ public class Monster : MonoBehaviour
 
     private void Start()
     {
-        GameManager.instance.RegisterMonster();
+        //GameManager.instance.RegisterMonster();
         //monsterCount++;
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -54,7 +54,7 @@ public class Monster : MonoBehaviour
     }
     private void Die()
     {
-        GameManager.instance.AddScore(100);
+        //GameManager.instance.AddScore(100);
         GameManager.instance.MonsterDied();
         Destroy(gameObject);
     }
