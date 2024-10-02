@@ -8,6 +8,7 @@ public class Monster : MonoBehaviour
     [SerializeField] float defaultSpeed;
     [SerializeField] float fastSpeed;
     private static int monsterCount = 0;
+    [SerializeField] Animator animator;
 
     private void Start()
     {
@@ -34,6 +35,7 @@ public class Monster : MonoBehaviour
                 {
                     Debug.Log("데미지 1받음");
                     TakeDamge(1);
+                    animator.Play("SickPig");
                 }
                 else
                 {

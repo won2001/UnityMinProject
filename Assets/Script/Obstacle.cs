@@ -88,7 +88,7 @@ public class WoodObstacle : BaseObstacle
 }
 public class StoneObstacle : BaseObstacle 
 {
-    private float fastSpeed = 8f;
+    private float fastSpeed = 10f;
 
     public override int GetHp()
     {
