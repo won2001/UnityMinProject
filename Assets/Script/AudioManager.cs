@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayer;
     int channelIndx;
 
-    public enum Sfx { Slingshot ,FlyRed,FlyYellow,FlyBlack, Wood=5}
+    public enum Sfx { Slingshot ,FlyRed,FlyYellow,FlyBlack, Wood=5, WoodDestroy, Ston, StonDestroy, Glass, GlassDestory, PigDamge, PigDie, Pig}
 
     private void Awake()
     {

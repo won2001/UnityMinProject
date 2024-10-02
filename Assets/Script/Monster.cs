@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour
     [SerializeField] float fastSpeed;
     private static int monsterCount = 0;
     [SerializeField] Animator animator;
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -36,9 +37,11 @@ public class Monster : MonoBehaviour
                     Debug.Log("데미지 1받음");
                     TakeDamge(1);
                     animator.Play("SickPig");
+                    AudioManager.instance.PlaySfx(AudioManager.Sfx.PigDamge);
                 }
                 else
                 {
+                    AudioManager.instance.PlaySfx(AudioManager.Sfx.Pig);
                     Debug.Log("데미지 무시");
                 }
             }
@@ -57,6 +60,7 @@ public class Monster : MonoBehaviour
     private void Die()
     {
         //GameManager.instance.AddScore(100);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.PigDie);
         GameManager.instance.MonsterDied();
         Destroy(gameObject);
     }

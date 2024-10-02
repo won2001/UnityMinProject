@@ -62,7 +62,7 @@ public abstract class BaseObstacle
 public class WoodObstacle : BaseObstacle
 {
     private float fastSpeed = 8f;
-
+    private AudioSource audioSource;
     public override int GetHp()
     {
         return 2;
@@ -79,6 +79,7 @@ public class WoodObstacle : BaseObstacle
             obstacle.TakeDamage(1);
             animator.Play("Woodhit");
             animator.Play("Woodwallhit");
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Wood);
         }
         else
         {
@@ -87,13 +88,14 @@ public class WoodObstacle : BaseObstacle
     }
     public override void OnDestroyed(Obstacle obstacle)
     {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.WoodDestroy);
         Object.Destroy(obstacle.gameObject);
     }
 }
 public class StoneObstacle : BaseObstacle 
 {
     private float fastSpeed = 12f;
-
+    private AudioSource audioSource;
     public override int GetHp()
     {
         return 4;
@@ -109,6 +111,7 @@ public class StoneObstacle : BaseObstacle
         {
             obstacle.TakeDamage(1);
             animator.Play("Stonhit");
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Ston);
         }
         else
         {
@@ -117,13 +120,14 @@ public class StoneObstacle : BaseObstacle
     }
     public override void OnDestroyed(Obstacle obstacle)
     {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.StonDestroy);
         Object.Destroy(obstacle.gameObject);
     }
 }
 public class GlassObstacle : BaseObstacle
 {
     private float fastSpeed = 5f;
-
+    private AudioSource audioSource;
     public override int GetHp()
     {
         return 2;
@@ -140,6 +144,7 @@ public class GlassObstacle : BaseObstacle
         {
             obstacle.TakeDamage(1);
             animator.Play("Glasshit");
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Glass);
         }
         else
         {
@@ -148,6 +153,7 @@ public class GlassObstacle : BaseObstacle
     }
     public override void OnDestroyed(Obstacle obstacle)
     {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.GlassDestory);
         Object.Destroy(obstacle.gameObject);
     }
 }
