@@ -60,7 +60,7 @@ public abstract class BaseObstacle
 }
 public class WoodObstacle : BaseObstacle
 {
-    private float fastSpeed = 6f;
+    private float fastSpeed = 8f;
 
     public override int GetHp()
     {
@@ -72,7 +72,7 @@ public class WoodObstacle : BaseObstacle
         {
             obstacle.TakeDamage(2);
         }
-        else if (speed >= 3f)
+        else if (speed >= 5f)
         {
             obstacle.TakeDamage(1);
         }
@@ -88,7 +88,7 @@ public class WoodObstacle : BaseObstacle
 }
 public class StoneObstacle : BaseObstacle 
 {
-    private float fastSpeed = 10f;
+    private float fastSpeed = 12f;
 
     public override int GetHp()
     {
@@ -116,7 +116,7 @@ public class StoneObstacle : BaseObstacle
 }
 public class GlassObstacle : BaseObstacle
 {
-    private float fastSpeed = 3f;
+    private float fastSpeed = 5f;
 
     public override int GetHp()
     {
@@ -129,7 +129,7 @@ public class GlassObstacle : BaseObstacle
         {
             obstacle.TakeDamage(2);
         }
-        else if (speed >= 1f)
+        else if (speed >= 2f)
         {
             obstacle.TakeDamage(1);
         }
