@@ -27,6 +27,7 @@ public class Slingshot : MonoBehaviour
     private Bird currentBird;
     private int currentBirdIndex = 0;
     private bool isBirdInAir; // 새가 공중에 있는지 여부
+
     private void Start()
     {
         // 고무줄 연결하기

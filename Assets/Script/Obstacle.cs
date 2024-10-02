@@ -7,6 +7,7 @@ public class Obstacle : MonoBehaviour
     public enum ObstacleType { Wood, Stone, Glass, Size } // 장애물 타입
     [SerializeField] ObstacleType curType = ObstacleType.Wood;
     private BaseObstacle[] obstacleState = new BaseObstacle[(int)ObstacleType.Size];
+    [SerializeField] Animator animator;
 
     private int hp;
 
@@ -68,6 +69,7 @@ public class WoodObstacle : BaseObstacle
     }
     public override void TypeCrash(Obstacle obstacle, float speed)
     {
+        Animator animator = obstacle.GetComponent<Animator>();
         if (speed >= fastSpeed)
         {
             obstacle.TakeDamage(2);
@@ -75,6 +77,8 @@ public class WoodObstacle : BaseObstacle
         else if (speed >= 5f)
         {
             obstacle.TakeDamage(1);
+            animator.Play("Woodhit");
+            animator.Play("Woodwallhit");
         }
         else
         {
@@ -96,6 +100,7 @@ public class StoneObstacle : BaseObstacle
     }
     public override void TypeCrash(Obstacle obstacle, float speed)
     {
+        Animator animator = obstacle.GetComponent<Animator>();
         if (speed >= fastSpeed)
         {
             obstacle.TakeDamage(2);
@@ -103,6 +108,7 @@ public class StoneObstacle : BaseObstacle
         else if (speed >= 3f)
         {
             obstacle.TakeDamage(1);
+            animator.Play("Stonhit");
         }
         else
         {
@@ -125,6 +131,7 @@ public class GlassObstacle : BaseObstacle
 
     public override void TypeCrash(Obstacle obstacle, float speed)
     {
+        Animator animator = obstacle.GetComponent<Animator>();
         if (speed >= fastSpeed)
         {
             obstacle.TakeDamage(2);
@@ -132,6 +139,7 @@ public class GlassObstacle : BaseObstacle
         else if (speed >= 2f)
         {
             obstacle.TakeDamage(1);
+            animator.Play("Glasshit");
         }
         else
         {
