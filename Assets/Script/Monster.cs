@@ -16,7 +16,7 @@ public class Monster : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        // 몬스터가 새, 장애물에 부딪쳤을때 발동
         if (collision.collider.CompareTag("Bird") || collision.collider.CompareTag("Obstacle"))
         {
             Rigidbody2D collisionRigidbody = collision.collider.GetComponent<Rigidbody2D>();
